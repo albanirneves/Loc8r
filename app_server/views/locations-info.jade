@@ -1,0 +1,59 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  .row.page-header
+    .col-lg-12
+      h1= name
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          p.rating
+            +outputRating(rating)
+          p= adress
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Horário de funcionamento
+            .panel-body
+              each data in openingTimes
+                - if(data.closed == false)
+                  p #{data.days} : #{data.opening} - #{data.closing}
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Facilidades
+            .panel-body
+              each facility in facilities
+                span.label.label-warning
+                  span.glyphicon.glyphicon-ok
+                  | &nbsp;#{facility}
+                | &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Mapa
+            .panel-body
+              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{coords.lat},#{coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{coords.lat},#{coords.lng}&scale=2')
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              a.btn.btn-default.pull-right(href='/location/review/new') Avaliar
+              h2.panel-title Avaliações dos clientes
+            .panel-body.review-container
+              each review in reviews
+                .row
+                  .review
+                    .well.well-sm.review-header
+                      span.rating
+                        +outputRating(review.rating)
+                      span.reviewAuthor= review.author
+                      small.reviewTimestamp= review.timestamp
+                    .col-xs-12
+                      p= review.reviewText
+    .col-xs-12.col-md-3
+      p.lead
+        | #{sidebar.main}
+      p
+        | #{sidebar.comment}
