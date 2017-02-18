@@ -5,6 +5,11 @@ var gracefulShutdown;
 var dbURI = 'mongodb://localhost/Loc8r';
 var debug = require('debug')('loc8r:model:db');
 
+if(process.env.NODE_ENV === 'production'){
+	dbURI = process.env.MONGOLAB_URI;
+}
+
+
 mongoose.connect(dbURI);
 
 //para o windows emitir o sinal SIGINT quando o processo Node.js se encerrar, permitindo que possamos 
