@@ -39,7 +39,7 @@ block content
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href='/location/review/new') Avaliar
+              a.btn.btn-default.pull-right(href='/location/#{_id}/reviews/new') Avaliar
               h2.panel-title Avaliações dos clientes
             .panel-body.review-container
               each review in reviews
@@ -48,12 +48,13 @@ block content
                     .well.well-sm.review-header
                       span.rating
                         +outputRating(review.rating)
-                      span.reviewAuthor= review.author
-                      small.reviewTimestamp= review.timestamp
+                      span.reviewAuthor= review.author + ' -'
+                      small.reviewTimestamp
+                        +formatDate(review.timestamp)
                     .col-xs-12
                       p= review.reviewText
     .col-xs-12.col-md-3
       p.lead
-        | #{sidebar.main}
+        | #{sidebar[0].main}
       p
-        | #{sidebar.comment}
+        | #{sidebar[0].comment}

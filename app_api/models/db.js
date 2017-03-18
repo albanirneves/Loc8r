@@ -9,8 +9,8 @@ if(process.env.NODE_ENV === 'production'){
 	dbURI = process.env.MONGOLAB_URI;
 }
 
-
 mongoose.connect(dbURI);
+mongoose.Promise = global.Promise;
 
 //para o windows emitir o sinal SIGINT quando o processo Node.js se encerrar, permitindo que possamos 
 //encerrar qualquer coisa antes que o processo se extinga.
