@@ -106,7 +106,7 @@ console.log(responseBody);
 	};
 
 if (process.env.NODE_ENV === 'production'){
-	apiOptions.server = 'https://albanirneves.herokuapp.com/';
+	apiOptions.server = 'https://albanirneves.herokuapp.com';
 }
 
 module.exports.homelist = function(req, res) {
