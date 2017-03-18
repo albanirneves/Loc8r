@@ -1,4 +1,5 @@
 /* GET 'home' page*/
+//mongodb://albanirneves:268419@ds011873.mlab.com:11873/loc8ralbanir
 
 'use strict';
 
@@ -8,7 +9,7 @@ var request = require('request'),
 	},
 	renderHomePage = function (req, res, responseBody) {
 		var message;
-
+console.log(responseBody);
 		if (!(responseBody instanceof Array)) {
 			message = "API lookup error";
 			responseBody = [];
