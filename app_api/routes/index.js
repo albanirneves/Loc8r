@@ -1,9 +1,9 @@
 'use strict';
 
 var express = require('express'),
-	router = express.Router(),
-	ctrlLocations = require('../controllers/locations'),
-	ctrlReviews = require('../controllers/reviews');
+    router = express.Router(),
+    ctrlLocations = require('../controllers/locations'),
+    ctrlReviews = require('../controllers/reviews');
 
 //locations
 

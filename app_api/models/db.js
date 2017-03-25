@@ -6,7 +6,7 @@ var dbURI = 'mongodb://localhost/Loc8r';
 var debug = require('debug')('loc8r:model:db');
 
 if(process.env.NODE_ENV === 'production'){
-	dbURI = process.env.MONGOLAB_URI;
+    dbURI = process.env.MONGOLAB_URI;
 }
 
 mongoose.connect(dbURI);
@@ -16,51 +16,51 @@ mongoose.Promise = global.Promise;
 //encerrar qualquer coisa antes que o processo se extinga.
 var readLine = require('readline');
 if(process.plataform == "win32"){
-	var rl = readLine.createInterface({
-		input: process.stdin,
-		output: process.stdout
-	});
+    var rl = readLine.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-	rl.on("SIGINT", function() {
-		process.emit("SIGINT");
-	});
+    rl.on("SIGINT", function() {
+        process.emit("SIGINT");
+    });
 }
 
 mongoose.connection.on('connected', function() {
-	debug('Mongoose connected to ' + dbURI);
+    debug('Mongoose connected to ' + dbURI);
 });
 
 mongoose.connection.on('error', function() {
-	debug('Mongoose connection error: ' + dbURI);
+    debug('Mongoose connection error: ' + dbURI);
 });
 
 mongoose.connection.on('disconnected', function() {
-	debug('Mongoose disconnected');
+    debug('Mongoose disconnected');
 });
 
 gracefulShutdown = function(msg, callback) {
-	mongoose.connection.close(function(){
-		console.log('Mongoose disconnected through ' + msg);
-		callback();
-	});
+    mongoose.connection.close(function(){
+        console.log('Mongoose disconnected through ' + msg);
+        callback();
+    });
 };
 
 process.once('SIGUSR2', function() {
-	gracefulShutdown('nodemon start', function() {
-		process.kill(process.pid, 'SIGUSR2');
-	});
+    gracefulShutdown('nodemon start', function() {
+        process.kill(process.pid, 'SIGUSR2');
+    });
 });
 
 process.on('SIGINT', function() {
-	gracefulShutdown('app termination', function() {
-		process.exit(0);
-	});
+    gracefulShutdown('app termination', function() {
+        process.exit(0);
+    });
 });
 
 process.on('SIGTERM', function() {
-	gracefulShutdown('Heroku app shutdown', function() {
-		process.exit(0);
-	});
+    gracefulShutdown('Heroku app shutdown', function() {
+        process.exit(0);
+    });
 });
 
 require('./locations');

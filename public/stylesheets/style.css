@@ -12,3 +12,5 @@ a {
 .review-header {margin-bottom: 10px;}
 .reviewAuthor {margin: 5px};
 .reviewTimestamp {color: #ccc;}
+
+#filter {margin-left: 4px;margin-bottom: 7px;}
